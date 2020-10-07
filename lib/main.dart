@@ -37,7 +37,10 @@ class FirstPage extends StatelessWidget {
               },
               child: Text('Next Page'),
             ),
-            Image.asset('images/Icon.jpg',), // アプリ内のバンドルされた画像を表示
+            Image.asset(
+              'images/Icon.jpg',
+              fit: BoxFit.contain,
+            ), // アプリ内のバンドルされた画像を表示
           ],
         ),
       ),
@@ -59,7 +62,7 @@ class SecondPage extends StatelessWidget {
             },
             child: Text('Go Back'),
           ),
-          Image.network('https://pbs.twimg.com/media/EGaAMDDU0AEaQAs?format=jpg&name=small'), //  ネットワークURL指定の画像表示
+          Image.network('https://pbs.twimg.com/profile_banners/3230712428/1597905079/1500x500'), //  ネットワークURL指定の画像表示
         ] 
       ),
     );
