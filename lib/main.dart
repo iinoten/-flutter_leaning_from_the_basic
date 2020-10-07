@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -10,7 +11,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue
       ),
-      home: FirstPage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => FirstPage(),
+        '/second': (context) => SecondPage("Routeで指定"),
+      },
     );
   }
 }
@@ -21,17 +26,8 @@ class FirstPage extends StatelessWidget {
       appBar: AppBar(title: const Text('First Page')),
       body: Center(
         child: RaisedButton(
-          onPressed: () async {
-            var message = await Navigator.push( // async/awaitでデータを貰う
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return SecondPage('messageFromFirst');
-                },
-                fullscreenDialog: true,
-              )
-            );
-            print(message);
+          onPressed: () {
+            Navigator.pushNamed(context, '/second'); //routeでルーティング
           },
           child: Text('Next Page'),
         ),
@@ -42,7 +38,7 @@ class FirstPage extends StatelessWidget {
 
 class SecondPage extends StatelessWidget {
   final String messageFromFirst;
-  SecondPage(this.messageFromFirst); // 引数の登録
+  SecondPage(this.messageFromFirst); // 引数の登録 引数をrequired
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(messageFromFirst)),
