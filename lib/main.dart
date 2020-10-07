@@ -181,11 +181,15 @@ class ContainerPage extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(8.0), // paddingを付ける
             margin: EdgeInsets.all(8.0), // Marginを付ける
-            color: Colors.white,  // 色をつける
             transform: Matrix4.rotationZ(0.1),  // 傾ける
             width: 300,
             height: 300,
             child: Text('Container'),
+            decoration: BoxDecoration(
+              color: Colors.white, // BoxDecolationの外でcolorを指定してたらエラーになる
+              border: Border.all(color: Colors.greenAccent, width: 10),
+              shape: BoxShape.circle  // 丸くできる
+            ),
           ),
         ],
       ),
