@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => FirstPage(),
-        '/second': (context) => SecondPage("Routeで指定"),
+        '/second': (context) => SecondPage(),
       },
     );
   }
@@ -25,11 +25,20 @@ class FirstPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('First Page')),
       body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/second'); //routeでルーティング
-          },
-          child: Text('Next Page'),
+        child: Column(
+          children:<Widget>[
+            RaisedButton(
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  '/second',
+                  arguments: 'Image'
+                ); //routeでルーティング
+              },
+              child: Text('Next Page'),
+            ),
+            Image.asset('images/Icon.jpg',), // アプリ内のバンドルされた画像を表示
+          ],
         ),
       ),
     );
@@ -37,9 +46,9 @@ class FirstPage extends StatelessWidget {
 }
 
 class SecondPage extends StatelessWidget {
-  final String messageFromFirst;
-  SecondPage(this.messageFromFirst); // 引数の登録 引数をrequired
+  @override
   Widget build(BuildContext context) {
+    var messageFromFirst = ModalRoute.of(context).settings.arguments; // ModalRoute を利用して遷移元からのデータを受けとる
     return Scaffold(
       appBar: AppBar(title: Text(messageFromFirst)),
       body: Center(
