@@ -51,13 +51,16 @@ class SecondPage extends StatelessWidget {
     var messageFromFirst = ModalRoute.of(context).settings.arguments; // ModalRoute を利用して遷移元からのデータを受けとる
     return Scaffold(
       appBar: AppBar(title: Text(messageFromFirst)),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            Navigator.pop<String>(context, 'SecondPageから戻った'); // popで戻る際にデータを渡す
-          },
-          child: Text('Go Back'),
-        ),
+      body: Column(
+        children: <Widget>[
+          RaisedButton(
+            onPressed: () {
+              Navigator.pop<String>(context, 'SecondPageから戻った'); // popで戻る際にデータを渡す
+            },
+            child: Text('Go Back'),
+          ),
+          Image.network('https://pbs.twimg.com/media/EGaAMDDU0AEaQAs?format=jpg&name=small'), //  ネットワークURL指定の画像表示
+        ] 
       ),
     );
   }
