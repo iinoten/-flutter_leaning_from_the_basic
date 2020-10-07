@@ -188,7 +188,16 @@ class ContainerPage extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white, // BoxDecolationの外でcolorを指定してたらエラーになる
               border: Border.all(color: Colors.greenAccent, width: 10),
-              shape: BoxShape.circle  // 丸くできる
+              shape: BoxShape.rectangle,  // 丸くできる
+              boxShadow: [
+                BoxShadow(blurRadius: 100),
+              ],
+              gradient: LinearGradient( // グラデーションが作れる
+                colors: [
+                  Colors.yellow,
+                  Colors.black
+                ],
+              ),
             ),
           ),
         ],
