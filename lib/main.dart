@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => FirstPage(),
         '/second': (context) => SecondPage(),
+        '/container': (context) => ContainerPage(),
       },
     );
   }
@@ -60,7 +61,11 @@ class SecondPage extends StatelessWidget {
             children: <Widget>[
               RaisedButton(
                 onPressed: () {
-                  Navigator.pop<String>(context, 'SecondPageから戻った'); // popで戻る際にデータを渡す
+                  Navigator.pushNamed(
+                    context,
+                    '/container',
+                    arguments: 'Image'
+                  ); //routeでルーティング
                 },
                 child: Text('Go Back'),
               ),
@@ -155,6 +160,35 @@ class SecondPage extends StatelessWidget {
           ),
         ),
       )
+    );
+  }
+}
+
+class ContainerPage extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        children: <Widget>[
+          RaisedButton(
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                '/container',
+                arguments: 'Image'
+              ); //routeでルーティング
+            },
+          ),
+          Container(
+            padding: EdgeInsets.all(8.0), // paddingを付ける
+            margin: EdgeInsets.all(8.0), // Marginを付ける
+            color: Colors.white,  // 色をつける
+            transform: Matrix4.rotationZ(0.1),  // 傾ける
+            width: 300,
+            height: 300,
+            child: Text('Container'),
+          ),
+        ],
+      ),
     );
   }
 }
