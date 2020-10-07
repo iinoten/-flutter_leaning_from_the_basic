@@ -99,7 +99,43 @@ class SecondPage extends StatelessWidget {
                   'https://pbs.twimg.com/profile_banners/3230712428/1597905079/1500x500',
                   fit: BoxFit.fitHeight,  //親ウィジェットの高さに合わせる
                 ), 
-              )
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue)
+                ),
+                margin: const EdgeInsets.all(10.0),
+                height: 300,
+                width: 300,
+                child: Image.network(
+                  'https://pbs.twimg.com/profile_banners/3230712428/1597905079/1500x500',
+                  fit: BoxFit.fitWidth,  //親ウィジェットの幅に合わせる
+                ), 
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue)
+                ),
+                margin: const EdgeInsets.all(10.0),
+                height: 300,
+                width: 300,
+                child: Image.network(
+                  'https://pbs.twimg.com/profile_banners/3230712428/1597905079/1500x500',
+                  fit: BoxFit.cover,  //親ウィジェットの高さと幅を比較して画像が埋まる方に合わせる
+                ), 
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue)
+                ),
+                margin: const EdgeInsets.all(10.0),
+                height: 300,
+                width: 300,
+                child: Image.network(
+                  'https://pbs.twimg.com/profile_banners/3230712428/1597905079/1500x500',
+                  fit: BoxFit.none,  //画像のサイズは変えずに真ん中に配置する
+                ), 
+              ),
             ] 
           ),
         ),
