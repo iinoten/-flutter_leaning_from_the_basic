@@ -74,6 +74,8 @@ class SecondPage extends StatelessWidget {
                 child: Image.network(
                   'https://pbs.twimg.com/profile_banners/3230712428/1597905079/1500x500',
                   fit: BoxFit.contain,  //親ウィジェットにサイズを合わせて可能な限り大きく
+                  gaplessPlayback: true,  // 画像が変更される時に、新しい画像が読みこまれるまで古い画像が残ってくれる
+
                 ), //  ネットワークURL指定の画像表示,
               ),
               Container(
@@ -135,6 +137,19 @@ class SecondPage extends StatelessWidget {
                   'https://pbs.twimg.com/profile_banners/3230712428/1597905079/1500x500',
                   fit: BoxFit.none,  //画像のサイズは変えずに真ん中に配置する
                 ), 
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue)
+                ),
+                margin: const EdgeInsets.all(10.0),
+                height: 300,
+                width: 300,
+                child: Icon(
+                  Icons.insert_emoticon, //アイコンを表示
+                  size: 100,
+                  color: Colors.pink,
+                ),
               ),
             ] 
           ),
