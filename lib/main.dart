@@ -25,7 +25,7 @@ class FirstPage extends StatelessWidget {
             Navigator.push(context,
               MaterialPageRoute(
                 builder: (context) {
-                  return SecondPage();
+                  return SecondPage('messageFromFirst'); //push先に引数を渡す
                 },
                 fullscreenDialog: true // これでダイアログになる
               ),
@@ -39,9 +39,11 @@ class FirstPage extends StatelessWidget {
 }
 
 class SecondPage extends StatelessWidget {
+  final String messageFromFirst;
+  SecondPage(this.messageFromFirst); // 引数の登録
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Second Page')),
+      appBar: AppBar(title: Text(messageFromFirst)),
       body: Center(
         child: RaisedButton(
           onPressed: () {
