@@ -54,17 +54,56 @@ class SecondPage extends StatelessWidget {
     var messageFromFirst = ModalRoute.of(context).settings.arguments; // ModalRoute を利用して遷移元からのデータを受けとる
     return Scaffold(
       appBar: AppBar(title: Text(messageFromFirst)),
-      body: Column(
-        children: <Widget>[
-          RaisedButton(
-            onPressed: () {
-              Navigator.pop<String>(context, 'SecondPageから戻った'); // popで戻る際にデータを渡す
-            },
-            child: Text('Go Back'),
+      body: Center(
+        child: SingleChildScrollView(  // スクロールできるようにした
+          child: Column(
+            children: <Widget>[
+              RaisedButton(
+                onPressed: () {
+                  Navigator.pop<String>(context, 'SecondPageから戻った'); // popで戻る際にデータを渡す
+                },
+                child: Text('Go Back'),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue)
+                ),
+                margin: const EdgeInsets.all(10.0),
+                height: 300,
+                width: 300,
+                child: Image.network(
+                  'https://pbs.twimg.com/profile_banners/3230712428/1597905079/1500x500',
+                  fit: BoxFit.contain,  //親ウィジェットにサイズを合わせて可能な限り大きく
+                ), //  ネットワークURL指定の画像表示,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue)
+                ),
+                margin: const EdgeInsets.all(10.0),
+                height: 300,
+                width: 300,
+                child: Image.network(
+                  'https://pbs.twimg.com/profile_banners/3230712428/1597905079/1500x500',
+                  fit: BoxFit.fill,  //縦横比を変えて親ウィジェットの大きさにする
+                ), 
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue)
+                ),
+                margin: const EdgeInsets.all(10.0),
+                height: 300,
+                width: 300,
+                child: Image.network(
+                  'https://pbs.twimg.com/profile_banners/3230712428/1597905079/1500x500',
+                  fit: BoxFit.fitHeight,  //親ウィジェットの高さに合わせる
+                ), 
+              )
+            ] 
           ),
-          Image.network('https://pbs.twimg.com/profile_banners/3230712428/1597905079/1500x500'), //  ネットワークURL指定の画像表示
-        ] 
-      ),
+        ),
+      )
     );
   }
 }
