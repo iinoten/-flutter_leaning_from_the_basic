@@ -219,7 +219,7 @@ class MultiChildLayout extends StatelessWidget {
           width: 100,
           color: Colors.green,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly, // 全てのウィジェットの上下左右均等に並べる
+            mainAxisAlignment: MainAxisAlignment.spaceBetween, // 全てのウィジェットの上下左右を気にせずに均等に並べる
             children: <Widget>[
               MyConteiner(),
               MyConteiner(),
