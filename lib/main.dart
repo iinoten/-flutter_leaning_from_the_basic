@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => FirstPage(),
         '/second': (context) => SecondPage(),
         '/container': (context) => ContainerPage(),
+        '/multiChildLayout': (context) => MultiChildLayout(),
       },
     );
   }
@@ -173,7 +174,7 @@ class ContainerPage extends StatelessWidget {
             onPressed: () {
               Navigator.pushNamed(
                 context,
-                '/container',
+                '/multiChildLayout',
                 arguments: 'Image'
               ); //routeでルーティング
             },
@@ -204,4 +205,37 @@ class ContainerPage extends StatelessWidget {
       ),
     );
   }
+}
+
+class MultiChildLayout extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('MultiChildLayout')
+        ),
+        body: Container(
+          alignment: Alignment.center,
+          width: 100,
+          color: Colors.green,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              MyConteiner(),
+              MyConteiner(),
+              MyConteiner(),
+            ],
+          )
+        ),
+      ),
+    );
+  }
+}
+Container MyConteiner({double size = 50}) {
+  return Container(
+    margin: const EdgeInsets.all(8),
+    height: size,
+    width: size,
+    color: Colors.black,
+  );
 }
