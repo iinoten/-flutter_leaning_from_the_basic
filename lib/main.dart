@@ -274,19 +274,18 @@ class PaintingAndEffects extends StatelessWidget {
 }
 
 class Scrolling extends StatelessWidget {
+  final items = ['1','2','3','4','5',];
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: Text('Scrolling')),
-        body: ListView( //リスト内の要素の数が固定の場合はこうする
-          children: const <Widget>[
-            ListTile(
-              title: Text('1'),
-            ),
-            ListTile(
-              title: Text('2'),
-            ),
-          ],
+        body: ListView.builder( //リスト内の要素の数が固定でない場合はこうする
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(items[index]),
+            );
+          },
         ),
       ),
     );
