@@ -274,18 +274,22 @@ class PaintingAndEffects extends StatelessWidget {
 }
 
 class Scrolling extends StatelessWidget {
-  final items = ['1','2','3','4','5',];
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(title: Text('Scrolling')),
-        body: ListView.builder( //リスト内の要素の数が固定でない場合はこうする
-          itemCount: items.length,
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(items[index]),
-            );
-          },
+        body: PageView( // 横スワイプでページ移動できるウィジェットを追加
+          children: <Widget>[
+            Container(
+              color: Colors.cyan,
+            ),
+            Container(
+              color: Colors.orange,
+            ),
+            Container(
+              color: Colors.deepPurple,
+            ),
+          ],
         ),
       ),
     );
