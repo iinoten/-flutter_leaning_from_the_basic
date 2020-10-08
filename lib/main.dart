@@ -288,6 +288,16 @@ class Scrolling extends StatelessWidget {
             ),
             Container(
               color: Colors.deepPurple,
+              child: RaisedButton(
+                child: Text("next"),
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    '/scrolling',
+                    arguments: 'Image'
+                  ); //routeでルーティング
+                },
+              ),
             ),
           ],
         ),
