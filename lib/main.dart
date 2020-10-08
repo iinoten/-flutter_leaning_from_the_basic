@@ -219,10 +219,11 @@ class MultiChildLayout extends StatelessWidget {
           width: 100,
           color: Colors.green,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround, // 全てのウィジェットを均等に並べて端のスペースは半分のスペースになる
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start, // 横幅が他とは違うものがあったときにどう合わせるかのプロパティ。startで大きいものの開始地点に合わせる
             children: <Widget>[
               MyConteiner(),
-              MyConteiner(),
+              MyConteiner(size: 70),
               MyConteiner(),
             ],
           )
