@@ -322,6 +322,7 @@ class InputForm extends StatelessWidget {
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   filled: true,
+                  fillColor: Colors.orange,
                   icon: Icon(Icons.person),
                   hintText: '名前を入力してください',
                   labelText: '名前',
