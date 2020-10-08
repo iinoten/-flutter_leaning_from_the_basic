@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
         '/container': (context) => ContainerPage(),
         '/multiChildLayout': (context) => MultiChildLayout(),
         '/paintingAndEffects': (context) => PaintingAndEffects(),
+        '/scrolling': (context) => Scrolling(),
       },
     );
   }
@@ -257,7 +258,37 @@ class PaintingAndEffects extends StatelessWidget {
     return DecoratedBox(
       decoration: BoxDecoration(
         color: Colors.red
-      )
+      ),
+      child: RaisedButton(
+        child: Text("next"),
+        onPressed: () {
+          Navigator.pushNamed(
+            context,
+            '/scrolling',
+            arguments: 'Image'
+          ); //routeでルーティング
+        },
+      ),
+    );
+  }
+}
+
+class Scrolling extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: Text('Scrolling')),
+        body: ListView( //リスト内の要素の数が固定の場合はこうする
+          children: const <Widget>[
+            ListTile(
+              title: Text('1'),
+            ),
+            ListTile(
+              title: Text('2'),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
