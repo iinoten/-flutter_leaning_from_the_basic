@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
         '/multiChildLayout': (context) => MultiChildLayout(),
         '/paintingAndEffects': (context) => PaintingAndEffects(),
         '/scrolling': (context) => Scrolling(),
+        '/inputForm': (context) => InputForm(),
       },
     );
   }
@@ -293,13 +294,60 @@ class Scrolling extends StatelessWidget {
                 onPressed: () {
                   Navigator.pushNamed(
                     context,
-                    '/scrolling',
+                    '/inputForm',
                     arguments: 'Image'
                   ); //routeでルーティング
                 },
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class InputForm extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>(); // これをしておくと
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: Text('Input')),
+        body: Form( // Formウィジェットは全てのFormFieldの上位に置く
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              TextFormField(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  filled: true,
+                  icon: Icon(Icons.person),
+                  hintText: '名前を入力してください',
+                  labelText: '名前',
+                ),
+                validator: (value) {
+                  if(value.isEmpty) {
+                    return '必須です';
+                  }
+                  return null;
+                },
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: RaisedButton(
+                  onPressed: () {
+                    if (_formKey.currentState.validate()) {
+                      Scaffold.of(context).showSnackBar(const SnackBar(
+                        content: Text('Processing Data'),
+                      ));
+                    }
+                  },
+                  child: const Text('Submit'),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
