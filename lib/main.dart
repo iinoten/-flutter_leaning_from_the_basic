@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
         '/second': (context) => SecondPage(),
         '/container': (context) => ContainerPage(),
         '/multiChildLayout': (context) => MultiChildLayout(),
+        '/paintingAndEffects': (context) => PaintingAndEffects(),
       },
     );
   }
@@ -222,6 +223,16 @@ class MultiChildLayout extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch, // 横幅が他とは違うものがあったときにどう合わせるかのプロパティ。大きいものの幅に合わせる
             children: <Widget>[
+              RaisedButton(
+                child: Text("next"),
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    '/paintingAndEffects',
+                    arguments: 'Image'
+                  ); //routeでルーティング
+                },
+              ),
               MyConteiner(),
               MyConteiner(size: 70),
               MyConteiner(),
@@ -239,4 +250,14 @@ Container MyConteiner({double size = 50}) {
     width: size,
     color: Colors.black,
   );
+}
+
+class PaintingAndEffects extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: Colors.red
+      )
+    );
+  }
 }
