@@ -219,7 +219,7 @@ class MultiChildLayout extends StatelessWidget {
           width: 100,
           color: Colors.green,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.end, // 最後から詰まれていく
+            mainAxisAlignment: MainAxisAlignment.center, // 中央に並べる
             children: <Widget>[
               MyConteiner(),
               MyConteiner(),
