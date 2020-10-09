@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 
@@ -20,6 +22,7 @@ class MyApp extends StatelessWidget {
         '/paintingAndEffects': (context) => PaintingAndEffects(),
         '/scrolling': (context) => Scrolling(),
         '/inputForm': (context) => InputForm(),
+        '/uniqueKeySamplePage': (context) => UniqueKeySamplePage(),
       },
     );
   }
@@ -346,7 +349,7 @@ class InputForm extends StatelessWidget {
                     }
                     Navigator.pushNamed(
                       context,
-                      '/inputForm',
+                      '/uniqueKeySamplePage',
                       arguments: 'Image'
                     ); //routeでルーティング
                   },
@@ -357,6 +360,67 @@ class InputForm extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class UniqueKeySamplePage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return UniqueKeySamplePageState();
+  }
+}
+class UniqueKeySamplePageState extends State<UniqueKeySamplePage> {
+  List<Widget> titles = [
+    StatefulRandomTitle(key: UniqueKey()),
+    StatefulRandomTitle(key: UniqueKey()),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Unique Key Sample'),
+      ),
+      body: Column(
+        children: <Widget>[
+          RaisedButton(
+            child: const Text('入れ替える'),
+            onPressed: ()=>swapTitles(),
+          ),
+          Column(children: titles),
+        ],
+      ),
+    );
+  }
+  swapTitles() {
+    setState(() {
+      titles.insert(1, titles.removeAt(0));
+    });
+  }
+}
+class StatefulRandomTitle extends StatefulWidget {
+  StatefulRandomTitle({Key key}) : super(key: key);
+  @override
+  StatefulRandomTitleState createState() => StatefulRandomTitleState();
+}
+class StatefulRandomTitleState extends State<StatefulRandomTitle> {
+  int random;
+
+  @override
+  void initState() {
+    super.initState();
+    random = Random().nextInt(1000);
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        ListTile(
+          title: Text(random.toString())
+        ),
+        const Divider(),
+      ],
     );
   }
 }
