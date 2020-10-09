@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
         '/scrolling': (context) => Scrolling(),
         '/inputForm': (context) => InputForm(),
         '/uniqueKeySamplePage': (context) => UniqueKeySamplePage(),
+        '/countUpPage': (context) => CountUpPage(),
       },
     );
   }
@@ -385,6 +386,16 @@ class UniqueKeySamplePageState extends State<UniqueKeySamplePage> {
       body: Column(
         children: <Widget>[
           RaisedButton(
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                '/countUpPage',
+                arguments: 'Image'
+              ); //routeでルーティング
+            },
+            child: const Text('Submit'),
+          ),
+          RaisedButton(
             child: const Text('入れ替える'),
             onPressed: ()=>swapTitles(),
           ),
@@ -421,6 +432,51 @@ class StatefulRandomTitleState extends State<StatefulRandomTitle> {
         ),
         const Divider(),
       ],
+    );
+  }
+}
+
+class CountUpPage extends StatelessWidget { 
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Count Up Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.orange,
+      ),
+      home: CountUpHomePage(title: 'Flutter Demo Home Page',),
+    );
+  }
+}
+class CountUpHomePage extends StatelessWidget {
+  final String title;
+
+  CountUpHomePage({this.title});
+
+  @override
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: ListView(
+        children: <Widget>[
+          // TODO それぞれのアーキテクチャ用の画面を足していく
+          ListTile(
+            title: const Text('setStateの場合'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Container (),
+                  fullscreenDialog: true
+                ),
+              );
+            },
+          ),
+        ],
+      ),
     );
   }
 }
