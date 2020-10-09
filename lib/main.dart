@@ -372,7 +372,7 @@ class UniqueKeySamplePage extends StatefulWidget {
 }
 class UniqueKeySamplePageState extends State<UniqueKeySamplePage> {
   List<Widget> titles = [
-    StatefulRandomTitle(key: UniqueKey()),
+    StatefulRandomTitle(key: UniqueKey()), // Dartのユニークキー生成クラス
     StatefulRandomTitle(key: UniqueKey()),
   ];
 
