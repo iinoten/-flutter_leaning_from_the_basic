@@ -322,6 +322,7 @@ class InputForm extends StatelessWidget {
                 decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   filled: true,
+                  suffixText: 'さん',
                   fillColor: Colors.orange,
                   icon: Icon(Icons.person),
                   hintText: '名前を入力してください',
@@ -343,6 +344,11 @@ class InputForm extends StatelessWidget {
                         content: Text('Processing Data'),
                       ));
                     }
+                    Navigator.pushNamed(
+                      context,
+                      '/inputForm',
+                      arguments: 'Image'
+                    ); //routeでルーティング
                   },
                   child: const Text('Submit'),
                 ),
