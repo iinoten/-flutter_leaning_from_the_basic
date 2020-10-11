@@ -1,7 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 void main() => runApp(MyApp());
 
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         '/scrolling': (context) => Scrolling(),
         '/inputForm': (context) => InputForm(),
         '/uniqueKeySamplePage': (context) => UniqueKeySamplePage(),
-        '/countUpPage': (context) => CountUpPage(),
+        '/httpGetWidget': (context) => HttpGetWidget(),
       },
     );
   }
@@ -389,7 +390,7 @@ class UniqueKeySamplePageState extends State<UniqueKeySamplePage> {
             onPressed: () {
               Navigator.pushNamed(
                 context,
-                '/countUpPage',
+                '/httpGetWidget',
                 arguments: 'Image'
               ); //routeでルーティング
             },
@@ -436,47 +437,51 @@ class StatefulRandomTitleState extends State<StatefulRandomTitle> {
   }
 }
 
-class CountUpPage extends StatelessWidget { 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Count Up Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.orange,
-      ),
-      home: CountUpHomePage(title: 'Flutter Demo Home Page',),
-    );
-  }
-}
-class CountUpHomePage extends StatelessWidget {
+class HttpGetWidget extends StatefulWidget {
+  HttpGetWidget({Key key, this.title}):super(key: key);
   final String title;
-
-  CountUpHomePage({this.title});
+  @override
+  _HttpGetWidgetState createState()=>_HttpGetWidgetState();
+}
+class _HttpGetWidgetState extends State<HttpGetWidget> {
+  List<String> _data;
 
   @override
-
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text("http request"),
       ),
-      body: ListView(
-        children: <Widget>[
-          // TODO それぞれのアーキテクチャ用の画面を足していく
-          ListTile(
-            title: const Text('setStateの場合'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Container (),
-                  fullscreenDialog: true
-                ),
-              );
-            },
-          ),
-        ],
+      body: ListView.builder(
+        itemCount: _data.length,
+        itemBuilder: (context, int index) {
+          return Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text( _data[index] ),
+          );
+        },
       ),
     );
+  }
+  void fetchPosts() async {
+    const url = 'https://jsonplaceholder.typicode.com/posts';
+     http.get(url)
+        .then((response) {
+      print("Response status: ${response.statusCode}");
+      print("Response body: ${response.body}");
+      setState(() {
+        List list = json.decode(response.body);
+        _data = list.map<String>((value) {
+          return value['title'];
+        }).toList();
+      });
+    });
+  }
+  @override
+  void initState() {
+    _data = [];
+    fetchPosts();
+
+    super.initState();
   }
 }
