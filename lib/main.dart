@@ -417,7 +417,7 @@ class StatefulRandomTitle extends StatefulWidget {
   StatefulRandomTitleState createState() => StatefulRandomTitleState();
 }
 class StatefulRandomTitleState extends State<StatefulRandomTitle> {
-  int random;
+  var random;
 
   @override
   void initState() {
@@ -438,50 +438,59 @@ class StatefulRandomTitleState extends State<StatefulRandomTitle> {
 }
 
 class HttpGetWidget extends StatefulWidget {
-  HttpGetWidget({Key key, this.title}):super(key: key);
+  HttpGetWidget({Key key, this.title}):super(key: key); // super 元クラスのデータ内容を書き換えるためのもの
   final String title;
-  @override
+  @override // 継承したクラス内の再定義を行うもの
   _HttpGetWidgetState createState()=>_HttpGetWidgetState();
 }
 class _HttpGetWidgetState extends State<HttpGetWidget> {
-  List<String> _data;
-
+  String _data = ""; // _data変数の中をList型で定義(中身はString型)
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("http request"),
       ),
-      body: ListView.builder(
-        itemCount: _data.length,
-        itemBuilder: (context, int index) {
-          return Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text( _data[index] ),
-          );
-        },
-      ),
+      body: Text(this._data.toString())
+      //ListView.builder( // Listウィジェットの中身が可変の場合にはコレ
+      //  itemCount: _data.length, // データの中身のlength
+      //  itemBuilder: (context, int index) {
+      //    return Padding(
+      //      padding: EdgeInsets.all(8.0),
+      //      child: Text( _data[index] ),
+      //    );
+      //  },
+      //),
     );
   }
   void fetchPosts() async {
-    const url = 'https://jsonplaceholder.typicode.com/posts';
+    const url = 'http://httpbin.org/ip';
      http.get(url)
         .then((response) {
+          print("done");
       print("Response status: ${response.statusCode}");
       print("Response body: ${response.body}");
       setState(() {
         List list = json.decode(response.body);
-        _data = list.map<String>((value) {
+        this._data = list;
+        list.map<String>((value) {
           return value['title'];
-        }).toList();
+          print(value['origin']);
+        }).toList(); // 与えられた各要素に処理を掛けた後に、その要素群に対する新しいリストを作成する。
       });
+      // delayのテスト
+      //Future.delayed(Duration(milliseconds: 3000))
+      //    .then((_) => {
+      //      setState(() {
+      //      this._data = "Hi World!";
+      //      })
+      //    });
     });
   }
   @override
   void initState() {
-    _data = [];
     fetchPosts();
 
-    super.initState();
+    super.initState();  // ウィジェットの作成時に処理をもう一度する
   }
 }
