@@ -471,12 +471,9 @@ class _HttpGetWidgetState extends State<HttpGetWidget> {
       print("Response status: ${response.statusCode}");
       print("Response body: ${response.body}");
       setState(() {
-        List list = json.decode(response.body);
-        this._data = list;
-        list.map<String>((value) {
-          return value['title'];
-          print(value['origin']);
-        }).toList(); // 与えられた各要素に処理を掛けた後に、その要素群に対する新しいリストを作成する。
+        Map list = json.decode(response.body);
+        //this._data = list;
+        print(list["origin"]);
       });
       // delayのテスト
       //Future.delayed(Duration(milliseconds: 3000))
